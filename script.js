@@ -1,7 +1,8 @@
 import Player from "./classes/player.js";
 import UI from "./classes/ui.js";
+import Button from "./utilities/button.js"
 
-window.addEventListener('load', function (){
+window.addEventListener('load', function () {
 
     const canvas = this.document.querySelector("canvas");
 
@@ -15,6 +16,7 @@ window.addEventListener('load', function (){
     const ui = new UI;
 
     let projectiles = [];
+    let buttons = [];
 
     // Framek    
     let animationId;
@@ -25,7 +27,14 @@ window.addEventListener('load', function (){
         player.draw(context);
         player.evaluateProjectiles(context, projectiles, canvas);
         ui.clearCanvas(context, canvas);
-        // console.log(projectiles);
+        buttons.forEach(button => {
+            button.draw(context, mouseClientX, mouseClientY);
+        });
+    }
+    function onclick() {
+        buttons.forEach(button => {
+            button.clicked(mouseClientX, mouseClientY);
+        });
     }
 
     // egér koordináták
@@ -40,6 +49,7 @@ window.addEventListener('load', function (){
     window.addEventListener("keyup", (event) => {
         projectiles = player.shoot(event, mouseClientX, mouseClientY, player, projectiles);
     });
+    window.addEventListener("click", onclick);
 
     animate();
 });
