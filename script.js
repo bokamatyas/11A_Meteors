@@ -5,7 +5,7 @@ window.addEventListener('load', function (){
 
     const canvas = this.document.querySelector("canvas");
 
-    canvas.width = this.window.innerWidth - window.innerWidth * 0.1;
+    canvas.width = this.window.innerWidth;
     canvas.height = this.window.innerHeight - window.innerHeight * 0.1;
 
     const context = canvas.getContext('2d');
