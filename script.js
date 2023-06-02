@@ -25,7 +25,7 @@ window.addEventListener('load', function (){
         player.draw(context);
         player.evaluateProjectiles(context, projectiles, canvas);
         ui.clearCanvas(context, canvas);
-        console.log(projectiles);
+        // console.log(projectiles);
     }
 
     // egér koordináták
