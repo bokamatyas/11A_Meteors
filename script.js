@@ -1,3 +1,4 @@
+import Enemy from "./classes/enemy.js";
 import Player from "./classes/player.js";
 import UI from "./classes/ui.js";
 
@@ -14,6 +15,20 @@ window.addEventListener('load', function (){
 
     const ui = new UI;
 
+    let enemies = [];
+
+    var stage = 1;
+    this.setInterval(()=> {
+        stage++;
+    }, 5000)
+    this.setInterval(() =>{
+        var speed = 0.8 * stage; // alapból 1 és 2 között majd idővel növelni a maximumot
+        var x = Math.random() * canvas.width;
+        var fallingAngle = Math.random() * 2  *stage - 1;
+        enemies.push(new Enemy(x, canvas.height * 0.1, 30, speed, fallingAngle));
+    }, 1000);
+
+
     let projectiles = [];
 
     // Framek    
@@ -21,11 +36,17 @@ window.addEventListener('load', function (){
     function animate(){
 
         animationId = requestAnimationFrame(animate);
-
+        for (let i = 0; i < enemies.length; i++) {
+            if(enemies[i].y > canvas.height * 0.9){
+                enemies.splice(i, 1);
+            }
+            enemies[i].draw(context, canvas);
+        }
         player.draw(context);
         player.evaluateProjectiles(context, projectiles, canvas);
         ui.clearCanvas(context, canvas);
         console.log(projectiles);
+        console.log(enemies);
     }
 
     // egér koordináták
