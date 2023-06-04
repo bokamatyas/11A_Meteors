@@ -1,13 +1,14 @@
 import Enemy from "./classes/enemy.js";
 import Player from "./classes/player.js";
 import UI from "./classes/ui.js";
+import Button from "./utilities/button.js";
 
-window.addEventListener('load', function (){
+window.addEventListener('load', function () {
 
     const canvas = this.document.querySelector("canvas");
 
-    canvas.width = this.window.innerWidth - window.innerWidth * 0.1;
-    canvas.height = this.window.innerHeight - window.innerHeight * 0.1;
+    canvas.width = this.window.innerWidth;
+    canvas.height = this.window.innerHeight - 10;
 
     const context = canvas.getContext('2d');
 
@@ -30,23 +31,41 @@ window.addEventListener('load', function (){
 
 
     let projectiles = [];
+    let buttons = [];
 
     // Framek    
     let animationId;
     function animate(){
 
         animationId = requestAnimationFrame(animate);
+      
         for (let i = 0; i < enemies.length; i++) {
             if(enemies[i].y > canvas.height * 0.9){
                 enemies.splice(i, 1);
             }
             enemies[i].draw(context, canvas);
         }
-        player.draw(context);
+       
+
+
         player.evaluateProjectiles(context, projectiles, canvas);
+        player.draw(context);
+        player.updateWeapon(context, mouseClientX, mouseClientY);        
+
         ui.clearCanvas(context, canvas);
-        console.log(projectiles);
-        console.log(enemies);
+
+        //console.log(projectiles);
+        //console.log(enemies);
+
+        buttons.forEach(button => {
+            button.draw(context, mouseClientX, mouseClientY);
+        });
+    }
+    function onclick() {
+        buttons.forEach(button => {
+            button.clicked(mouseClientX, mouseClientY);
+        });
+
     }
 
     // egér koordináták
@@ -54,13 +73,14 @@ window.addEventListener('load', function (){
     let mouseClientY;
     this.window.addEventListener("pointermove", (e) => {
         mouseClientX = e.clientX;
-        mouseClientY = e.clientY;
+        mouseClientY = e.clientY;        
     });
 
     // tüzelés listener
     window.addEventListener("keyup", (event) => {
-        projectiles = player.shoot(event, mouseClientX, mouseClientY, player, projectiles);
+        projectiles = player.shoot(event, mouseClientX, mouseClientY, projectiles);
     });
+    window.addEventListener("click", onclick);
 
     animate();
 });
