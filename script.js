@@ -1,13 +1,13 @@
 import Player from "./classes/player.js";
 import UI from "./classes/ui.js";
-import Button from "./utilities/button.js"
+import Button from "./utilities/button.js";
 
 window.addEventListener('load', function () {
 
     const canvas = this.document.querySelector("canvas");
 
     canvas.width = this.window.innerWidth;
-    canvas.height = this.window.innerHeight - window.innerHeight * 0.1;
+    canvas.height = this.window.innerHeight - 10;
 
     const context = canvas.getContext('2d');
 
@@ -24,8 +24,10 @@ window.addEventListener('load', function () {
 
         animationId = requestAnimationFrame(animate);
 
-        player.draw(context);
         player.evaluateProjectiles(context, projectiles, canvas);
+        player.draw(context);
+        player.updateWeapon(context, mouseClientX, mouseClientY);        
+
         ui.clearCanvas(context, canvas);
         buttons.forEach(button => {
             button.draw(context, mouseClientX, mouseClientY);
@@ -42,12 +44,12 @@ window.addEventListener('load', function () {
     let mouseClientY;
     this.window.addEventListener("pointermove", (e) => {
         mouseClientX = e.clientX;
-        mouseClientY = e.clientY;
+        mouseClientY = e.clientY;        
     });
 
     // tüzelés listener
     window.addEventListener("keyup", (event) => {
-        projectiles = player.shoot(event, mouseClientX, mouseClientY, player, projectiles);
+        projectiles = player.shoot(event, mouseClientX, mouseClientY, projectiles);
     });
     window.addEventListener("click", onclick);
 
