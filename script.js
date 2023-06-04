@@ -13,6 +13,7 @@ window.addEventListener('load', function () {
     const context = canvas.getContext('2d');
 
     const player = new Player(canvas.width * 0.5, canvas.height - canvas.height * 0.1, 20);
+    const enemy = new Enemy();
 
     const ui = new UI;
 
@@ -45,7 +46,7 @@ window.addEventListener('load', function () {
             }
             enemies[i].draw(context, canvas);
         }
-       
+       enemy.hitDetection(enemies, projectiles);
 
 
         player.evaluateProjectiles(context, projectiles, canvas);

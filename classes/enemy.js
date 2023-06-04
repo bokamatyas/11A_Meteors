@@ -26,4 +26,22 @@ export default class Enemy{
         this.y += this.dy;
         this.x += this.dx;
     }
+
+    hitDetection(enemies, projectiles){
+        enemies.forEach((enemy, enemyIndex) => {                        
+
+            projectiles.forEach((projectile, projectileIndex ) => {
+
+                const distance = Math.hypot(projectile.x - enemy.x, projectile.y - enemy.y);
+
+                if(distance - enemy.radius < 1) {
+                    setTimeout(() =>{
+                        enemies.splice(enemyIndex, 1);
+                        projectiles.splice(projectileIndex, 1);
+                    }, 0);
+                }
+            });
+
+        });
+    }
 }
