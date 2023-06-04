@@ -80,7 +80,7 @@ export default class Player {
       };
 
       projectiles.push(
-        new Projectile(this.x, this.y, 5, "rgba(255, 215, 0, 1)", velocity)
+        new Projectile(this.x, this.y, 5, "rgba(0, 255, 0, 1)", velocity)
       );
     }
     return projectiles;
