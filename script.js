@@ -18,6 +18,7 @@ window.addEventListener('load', function () {
     const ui = new UI;
 
     let enemies = [];
+    let explosions = [];
 
     var stage = 1;
     this.setInterval(()=> {
@@ -46,7 +47,7 @@ window.addEventListener('load', function () {
             }
             enemies[i].draw(context, canvas);
         }
-       enemy.hitDetection(enemies, projectiles);
+       enemy.hitDetection(context, enemies, projectiles, explosions);
 
 
         player.evaluateProjectiles(context, projectiles, canvas);
