@@ -1,3 +1,5 @@
+import Explosion from "./explosion.js";
+
 export default class Enemy{
     constructor(x, y, radius, dy, dx) {
         this.x = x;
@@ -27,7 +29,21 @@ export default class Enemy{
         this.x += this.dx;
     }
 
-    hitDetection(enemies, projectiles){
+    evaluateExplosions(context, explosions){
+        explosions.forEach((explosion, explosionIndex) => {
+            explosion.update(context);
+            if (explosion.alpha <= 0.01) {
+                explosions.splice(explosionIndex, 1);
+            } else {
+                explosion.update(context);
+            }
+        });
+    }
+
+    hitDetection(context, enemies, projectiles, explosions){
+
+        this.evaluateExplosions(context, explosions);
+
         enemies.forEach((enemy, enemyIndex) => {                        
 
             projectiles.forEach((projectile, projectileIndex ) => {
@@ -35,6 +51,20 @@ export default class Enemy{
                 const distance = Math.hypot(projectile.x - enemy.x, projectile.y - enemy.y);
 
                 if(distance - enemy.radius < 1) {
+                    for (let i = 0; i < enemy.radius * 2; i++) {
+
+                        explosions.push(new Explosion(
+                            enemy.x,
+                            enemy.y,
+                            Math.random() * 2,
+                            `hsl(${Math.random() * (70 - 30) + 30}, 100%, 40%)`,
+                            {
+                                x: (Math.random() - 0.5) * (Math.random() * 8),
+                                y: (Math.random() - 0.5) * (Math.random() * 8)
+                            }
+                        ));    
+                    }
+
                     setTimeout(() =>{
                         enemies.splice(enemyIndex, 1);
                         projectiles.splice(projectileIndex, 1);
