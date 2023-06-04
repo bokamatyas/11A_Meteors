@@ -105,4 +105,8 @@ export default class Player {
       
     return projectiles;
   }
+
+  // evaulateMeteors(context, meteors, canvas){
+
+  // }
 }
