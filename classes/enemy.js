@@ -6,15 +6,26 @@ export default class Enemy{
         this.y = y;
         this.radius = radius;
         this.dy = dy; // esés gyorsaságát határozza meg
-        this.dx = dx;
+        this.dx = dx;        
+
+        this.meteor = document.querySelector("#meteor" + `${Math.floor(Math.random() * (3 - 1) + 1)}`)
     }
 
 
     drawBall(context){
-        context.beginPath();
-        context.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
-        context.fillStyle = "rgba(255, 255, 255, 1)";
-        context.fill();
+
+        context.drawImage(
+            this.meteor,
+            0,
+            0,
+            500,
+            500,
+            this.x - this.radius * 0.5,
+            this.y - this.radius * 0.5,
+            50,
+            50
+        ); 
+        
     }
 
     draw(context, canvas) {
