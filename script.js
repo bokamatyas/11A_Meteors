@@ -28,7 +28,7 @@ window.addEventListener('load', function () {
         var speed = 0.8 * stage; // alapból 1 és 2 között majd idővel növelni a maximumot
         var x = Math.random() * canvas.width;
         var fallingAngle = Math.random() * 2  *stage - 1;
-        enemies.push(new Enemy(x, canvas.height * 0.1, 50, speed, fallingAngle));
+        enemies.push(new Enemy(x, canvas.height * 0.1, 70, speed, fallingAngle));
     }, 1000);
 
 

@@ -22,10 +22,10 @@ export default class Enemy{
             500,
             this.x - this.radius * 0.5,
             this.y - this.radius * 0.5,
-            50,
-            50
+            this.radius,
+            this.radius
         ); 
-        
+
     }
 
     draw(context, canvas) {
