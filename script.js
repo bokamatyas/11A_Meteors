@@ -1,7 +1,13 @@
 import Enemy from "./classes/enemy.js";
 import Player from "./classes/player.js";
 import UI from "./classes/ui.js";
+import get_highscores from "./database/get_highscore.js";
+import save_highscore from "./database/save_highscore.js";
 import Button from "./utilities/button.js";
+
+// save_highscore("asd", 3);
+const highcorses = get_highscores(2);
+highcorses.then((a) => {console.log(a)});
 
 window.addEventListener('load', function () {
 
