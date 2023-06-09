@@ -2,6 +2,7 @@ import Enemy from "./classes/enemy.js";
 import Player from "./classes/player.js";
 import UI from "./classes/ui.js";
 import Button from "./utilities/button.js";
+import { initializeApp } from './node_modules/@firebase/app';
 
 window.addEventListener('load', function () {
 
