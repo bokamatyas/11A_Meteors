@@ -9,12 +9,14 @@ import Button from "./utilities/button.js";
 const highcorses = get_highscores(2);
 highcorses.then((a) => {console.log(a)});
 
-window.addEventListener('load', function () {
+// const window = this.window;
 
-    const canvas = this.document.querySelector("canvas");
+function mainGame() {
 
-    canvas.width = this.window.innerWidth;
-    canvas.height = this.window.innerHeight - 10;
+    const canvas = document.querySelector("canvas");
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight - 10;
 
     const context = canvas.getContext('2d');
 
@@ -27,10 +29,10 @@ window.addEventListener('load', function () {
     let explosions = [];
 
     var stage = 1;
-    this.setInterval(()=> {
+    setInterval(()=> {
         stage++;
     }, 5000)
-    this.setInterval(() =>{
+    setInterval(() =>{
         var speed = 0.8 * stage; // alapból 1 és 2 között majd idővel növelni a maximumot
         var x = Math.random() * canvas.width;
         var fallingAngle = Math.random() * 2  *stage - 1;
@@ -79,7 +81,7 @@ window.addEventListener('load', function () {
     // egér koordináták
     let mouseClientX;
     let mouseClientY;
-    this.window.addEventListener("pointermove", (e) => {
+    window.addEventListener("pointermove", (e) => {
         mouseClientX = e.clientX;
         mouseClientY = e.clientY;        
     });
@@ -91,4 +93,6 @@ window.addEventListener('load', function () {
     window.addEventListener("click", onclick);
 
     animate();
-});
+};
+
+mainGame(window);
