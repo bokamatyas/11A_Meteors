@@ -5,9 +5,18 @@ import get_highscores from "./database/get_highscore.js";
 import save_highscore from "./database/save_highscore.js";
 import Button from "./utilities/button.js";
 
+const startY = (window.height / 2) + window.height * 0.1;
+const endY =  (window.height / 2) - window.height * 0.1;
+const easyBut = new Button(window.width * 0.1, startY, window.width * 0.3, endY, imgsrc , mainGame());
+const medBut = new Button(window.width *  0.4, startY, window.width * 0.6, endY, imgsrc, mainGame());
+const hardBut = new Button(window.width * 0.7, startY, window.width * 0.9, endY, imgsrc, mainGame());
+
+easyBut.draw();
+medBut.draw();
+hardBut.draw();
 // save_highscore("asd", 3);
-const highcorses = get_highscores(2);
-highcorses.then((a) => {console.log(a)});
+// const highcorses = get_highscores(2);
+// highcorses.then((a) => {console.log(a)});
 
 window.addEventListener('load', function () {
 
